@@ -14,9 +14,17 @@ import type { Car } from "@/types/car";
 
 type ContactFormProps = {
   cars: Car[];
+  whatsappNumber: string;
+  contactEmail: string;
+  contactLocation: string;
 };
 
-export function ContactForm({ cars }: ContactFormProps) {
+export function ContactForm({
+  cars,
+  whatsappNumber,
+  contactEmail,
+  contactLocation,
+}: ContactFormProps) {
   const [selectedModel, setSelectedModel] = useState(cars[0]?.name ?? "");
   const [name, setName] = useState("");
   const [phone, setPhone] = useState("");
@@ -27,6 +35,11 @@ export function ContactForm({ cars }: ContactFormProps) {
   const [submitted, setSubmitted] = useState(false);
   const [errorText, setErrorText] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
+
+  const cleanWhatsAppNumber = whatsappNumber.replace(/\D/g, "");
+  const displayWhatsAppNumber = cleanWhatsAppNumber
+    ? `+${cleanWhatsAppNumber}`
+    : whatsappNumber;
 
   const resetForm = () => {
     setName("");
@@ -85,7 +98,7 @@ export function ContactForm({ cars }: ContactFormProps) {
             </div>
             <div>
               <p className="text-sm text-white/45">Phone</p>
-              <p className="mt-1 font-medium text-white">+60 12-345 6789</p>
+              <p className="mt-1 font-medium text-white">{displayWhatsAppNumber}</p>
             </div>
           </div>
         </div>
@@ -97,7 +110,7 @@ export function ContactForm({ cars }: ContactFormProps) {
             </div>
             <div>
               <p className="text-sm text-white/45">Email</p>
-              <p className="mt-1 font-medium text-white">sales@cardealer.com</p>
+              <p className="mt-1 font-medium text-white">{contactEmail}</p>
             </div>
           </div>
         </div>
@@ -109,9 +122,7 @@ export function ContactForm({ cars }: ContactFormProps) {
             </div>
             <div>
               <p className="text-sm text-white/45">Location</p>
-              <p className="mt-1 font-medium text-white">
-                Proton Sales Gallery, Malaysia
-              </p>
+              <p className="mt-1 font-medium text-white">{contactLocation}</p>
             </div>
           </div>
         </div>
@@ -207,7 +218,7 @@ export function ContactForm({ cars }: ContactFormProps) {
             </button>
 
             <a
-              href="https://wa.me/60123456789"
+              href={`https://wa.me/${cleanWhatsAppNumber}`}
               target="_blank"
               rel="noreferrer"
               className="rounded-full border border-white/15 bg-white/10 px-6 py-3 text-sm font-semibold text-white transition hover:bg-white/15"

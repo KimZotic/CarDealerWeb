@@ -1,8 +1,10 @@
 import { ContactForm } from "@/components/contact/contact-form";
 import { getPublicCars } from "@/lib/cars";
+import { getSiteSettings } from "@/lib/site-settings";
 
 export default async function ContactPage() {
   const cars = await getPublicCars();
+  const settings = await getSiteSettings();
 
   return (
     <div className="bg-[#050816] text-white">
@@ -12,7 +14,12 @@ export default async function ContactPage() {
         </h1>
 
         <div className="mt-10">
-          <ContactForm cars={cars} />
+          <ContactForm
+            cars={cars}
+            whatsappNumber={settings.whatsappNumber}
+            contactEmail={settings.contactEmail}
+            contactLocation={settings.contactLocation}
+          />
         </div>
       </section>
     </div>

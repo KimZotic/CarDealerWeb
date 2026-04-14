@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { useMemo, useState } from "react";
 import { Check, GitCompareArrows } from "lucide-react";
 import { PremiumSelect } from "@/components/ui/premium-select";
@@ -99,16 +100,28 @@ export function CompareClient({ cars }: CompareClientProps) {
             gridTemplateColumns: `repeat(${selectedCars.length}, minmax(0, 1fr))`,
           }}
         >
-          {selectedCars.map((car, index) => (
-            <div
-              key={`${car.id}-${index}`}
-              className="overflow-hidden rounded-3xl border border-white/10 bg-white/5 backdrop-blur-xl"
-            >
-              <div className="relative h-48 border-b border-white/10 bg-gradient-to-br from-white/10 to-white/5">
-                <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(255,255,255,0.12),transparent_45%)]" />
-                <div className="flex h-full items-end p-5">
-                  <div>
-                    <p className="mb-2 text-[10px] uppercase tracking-[0.3em] text-white/45">
+          {selectedCars.map((car, index) => {
+            const coverImage = car.images?.[0]?.url;
+
+            return (
+              <div
+                key={`${car.id}-${index}`}
+                className="overflow-hidden rounded-3xl border border-white/10 bg-white/5 backdrop-blur-xl"
+              >
+                <div className="relative h-52 border-b border-white/10 bg-gradient-to-br from-white/10 to-white/5">
+                  {coverImage ? (
+                    <Image
+                      src={coverImage}
+                      alt={car.name}
+                      fill
+                      className="object-cover"
+                    />
+                  ) : (
+                    <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(255,255,255,0.12),transparent_45%)]" />
+                  )}
+
+                  <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/75 via-black/20 to-transparent p-5">
+                    <p className="mb-2 text-[10px] uppercase tracking-[0.3em] text-white/60">
                       {car.category}
                     </p>
                     <h2 className="text-2xl font-semibold text-white">
@@ -116,25 +129,25 @@ export function CompareClient({ cars }: CompareClientProps) {
                     </h2>
                   </div>
                 </div>
-              </div>
 
-              <div className="p-5">
-                <p className="text-[10px] uppercase tracking-[0.25em] text-white/45">
-                  Monthly From
-                </p>
-                <div className="mt-1 flex items-end gap-1">
-                  <span className="text-2xl font-semibold text-white">
-                    {car.monthlyPrice}
-                  </span>
-                  <span className="pb-1 text-xs text-white/55">/mo</span>
-                </div>
+                <div className="p-5">
+                  <p className="text-[10px] uppercase tracking-[0.25em] text-white/45">
+                    Monthly From
+                  </p>
+                  <div className="mt-1 flex items-end gap-1">
+                    <span className="text-2xl font-semibold text-white">
+                      {car.monthlyPrice}
+                    </span>
+                    <span className="pb-1 text-xs text-white/55">/mo</span>
+                  </div>
 
-                <div className="mt-2 text-sm text-white/60">
-                  Cash from {car.cashPrice}
+                  <div className="mt-2 text-sm text-white/60">
+                    Cash from {car.cashPrice}
+                  </div>
                 </div>
               </div>
-            </div>
-          ))}
+            );
+          })}
         </div>
       )}
 

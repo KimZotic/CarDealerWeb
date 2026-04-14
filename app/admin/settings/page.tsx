@@ -137,36 +137,11 @@ export default async function AdminSettingsPage() {
                 <div className="grid gap-5 md:grid-cols-2">
                   <div>
                     <label className="mb-2 block text-sm text-white/65">
-                      Marquee Text
-                    </label>
-                    <input
-                      name="marqueeText"
-                      defaultValue={settings.marqueeText}
-                      className="w-full rounded-2xl border border-white/10 bg-black/20 px-4 py-4 text-sm text-white outline-none"
-                    />
-                  </div>
-
-                  <div>
-                    <label className="mb-2 block text-sm text-white/65">
                       Homepage Featured Title
                     </label>
                     <input
                       name="homepageFeaturedTitle"
                       defaultValue={settings.homepageFeaturedTitle}
-                      className="w-full rounded-2xl border border-white/10 bg-black/20 px-4 py-4 text-sm text-white outline-none"
-                    />
-                  </div>
-                </div>
-
-                <div className="grid gap-5 md:grid-cols-2">
-                  <div>
-                    <label className="mb-2 block text-sm text-white/65">
-                      WhatsApp Number
-                    </label>
-                    <input
-                      name="whatsappNumber"
-                      defaultValue={settings.whatsappNumber}
-                      placeholder="60123456789"
                       className="w-full rounded-2xl border border-white/10 bg-black/20 px-4 py-4 text-sm text-white outline-none"
                     />
                   </div>
@@ -185,7 +160,19 @@ export default async function AdminSettingsPage() {
                   </div>
                 </div>
 
-                <div className="grid gap-5 md:grid-cols-2">
+                <div className="grid gap-5 md:grid-cols-3">
+                  <div>
+                    <label className="mb-2 block text-sm text-white/65">
+                      WhatsApp Number
+                    </label>
+                    <input
+                      name="whatsappNumber"
+                      defaultValue={settings.whatsappNumber}
+                      placeholder="60123456789"
+                      className="w-full rounded-2xl border border-white/10 bg-black/20 px-4 py-4 text-sm text-white outline-none"
+                    />
+                  </div>
+
                   <div>
                     <label className="mb-2 block text-sm text-white/65">
                       Contact Email
